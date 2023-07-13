@@ -2,6 +2,8 @@ package com.api.book.sevice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -25,5 +27,28 @@ public class BookService {
 		Book book=null;
 		book=list.stream().filter(e->e.getId()==id).findFirst().get();
 		return book;
+	}
+	//add book
+	public Book addBook(Book book) {
+		list.add(book);
+		return book;
+	}
+	
+	//delete book
+	//this filter the books which are not matching while collecting and finally restore in list
+	public void deleteBook(int id) {
+		list=list.stream().filter(book->book.getId()!=id).collect(Collectors.toList());
+	}
+	
+	//update book
+	public void updateBook(Book book,int id) {
+		list=list.stream().map(b->{
+			if(b.getId()==id) {
+				b.setId(book.getId());
+				b.setAuthor(book.getAuthor());
+				b.setTitle(book.getTitle());
+			}
+			return b;
+		}).collect(Collectors.toList());
 	}
 }

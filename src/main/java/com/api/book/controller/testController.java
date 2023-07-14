@@ -77,7 +77,7 @@ public class testController {
 	public ResponseEntity<Void> updateBook(@RequestBody Book book,@PathVariable("id")int id) {
 		try {
 			bookService.updateBook(book, id);
-			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			return ResponseEntity.status(HttpStatus.OK).build();
 		}
 		catch(Exception e) {
 			e.printStackTrace();

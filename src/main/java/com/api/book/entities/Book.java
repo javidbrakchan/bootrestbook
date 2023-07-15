@@ -1,7 +1,20 @@
 package com.api.book.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="Books")
 public class Book {
 
+	
+@javax.persistence.Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+@Column(name="book_id")
 private int Id;
 private String title;
 private String author;

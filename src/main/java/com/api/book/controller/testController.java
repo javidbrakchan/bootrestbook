@@ -49,7 +49,7 @@ public class testController {
 		Book b=null;
 		try {
 			b=bookService.addBook(book);
-			return ResponseEntity.of(Optional.of(b));
+			return ResponseEntity.status(HttpStatus.CREATED).build();
 		}
 		catch(Exception e) {
 			e.printStackTrace();

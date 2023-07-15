@@ -1,9 +1,11 @@
 package com.api.book.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -17,7 +19,8 @@ public class Book {
 @Column(name="book_id")
 private int Id;
 private String title;
-private String author;
+@OneToOne(cascade=CascadeType.ALL)//cascade..created author at the time of book creation because we need author id before creation of book
+private Author author;
 public int getId() {
 	return Id;
 }
@@ -30,13 +33,13 @@ public String getTitle() {
 public void setTitle(String title) {
 	this.title = title;
 }
-public String getAuthor() {
+public Author getAuthor() {
 	return author;
 }
-public void setAuthor(String author) {
+public void setAuthor(Author author) {
 	this.author = author;
 }
-public Book(int id, String title, String author) {
+public Book(int id, String title, Author author) {
 	super();
 	Id = id;
 	this.title = title;

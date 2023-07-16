@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name="Books")
@@ -20,6 +22,7 @@ public class Book {
 private int Id;
 private String title;
 @OneToOne(cascade=CascadeType.ALL)//cascade..created author at the time of book creation because we need author id before creation of book
+@JsonManagedReference
 private Author author;
 public int getId() {
 	return Id;

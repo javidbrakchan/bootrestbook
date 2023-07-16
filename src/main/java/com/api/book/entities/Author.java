@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Author {
@@ -14,7 +17,16 @@ public class Author {
 	private String firstName;
 	private String lastName;
 	private String language;
+	@OneToOne(mappedBy ="author")
+	@JsonBackReference //for child class..it tells we are not accesing book because we have come from book itself 
+	private Book book;
 	
+	public Book getBook() {
+		return book;
+	}
+	public void setBook(Book book) {
+		this.book = book;
+	}
 	public int getAuthorId() {
 		return authorId;
 	}

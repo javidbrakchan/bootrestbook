@@ -13,9 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class FileUploadHelper {
 
-	public final String UPLOAD_DIR="D:\\Applications\\SpringBootWorkspace\\GithubWorkspace\\bootrestbook\\src\\main\\resources\\static\\image";
+	//public final String UPLOAD_DIR="D:\\Applications\\SpringBootWorkspace\\GithubWorkspace\\bootrestbook\\src\\main\\resources\\static\\image";
 	
-	public boolean uploadFile(MultipartFile multipartfile) {
+	public boolean uploadFile(MultipartFile multipartfile,String path) {
 		boolean f=false;
 		try {
 			
@@ -30,7 +30,7 @@ public class FileUploadHelper {
 //			fos.close();
 			
 			//shortcut for above
-			Files.copy(multipartfile.getInputStream(),Paths.get(UPLOAD_DIR+File.separator+multipartfile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(multipartfile.getInputStream(),Paths.get(path+File.separator+multipartfile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
 			
 			f=true;
 			

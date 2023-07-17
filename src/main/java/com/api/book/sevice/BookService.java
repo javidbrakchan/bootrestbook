@@ -7,11 +7,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.api.book.dao.BookRepository;
 import com.api.book.entities.Book;
 
-@Component
+//@Component
+@Service
 public class BookService {
 
 	//private static List<Book> list=new ArrayList<>();
@@ -23,6 +25,7 @@ public class BookService {
 	
 	@Autowired
 	private BookRepository bookRepository;
+	
 	//get all books
 	public List<Book> getAllBook(){
 		List<Book>list=(List<Book>)this.bookRepository.findAll(); //typecasting of iterable into list as iterable is a parent class

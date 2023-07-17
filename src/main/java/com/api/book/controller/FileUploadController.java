@@ -1,8 +1,11 @@
 package com.api.book.controller;
 
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +19,13 @@ public class FileUploadController {
 	@Autowired
 	private FileUploadHelper fileUploadHelper;
 	
-	@PostMapping("/uploadfile")
+	@PostMapping("/uploadfile/path/{path}")
 	//file is interface which receives files
-	public ResponseEntity<String> uploadFile(@RequestParam("file")MultipartFile file){
-		
+	public ResponseEntity<String> uploadFile(@RequestParam("file")MultipartFile file,@PathVariable("path") String path){
+		System.out.println("encoded path "+path);
+		byte[] decodedBytes = Base64.getDecoder().decode(path);
+		String decodedString = new String(decodedBytes);
+		System.out.println("decoded Path "+decodedString);
 		try {
 		//validation
 		if(file.isEmpty())
@@ -33,7 +39,7 @@ public class FileUploadController {
 		}
 		
 		//upload file
-		if(fileUploadHelper.uploadFile(file)) {
+		if(fileUploadHelper.uploadFile(file,decodedString)) {
 			return ResponseEntity.ok("file is succesfully uploaded");
 		}
 		}catch (Exception e) {
